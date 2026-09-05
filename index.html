@@ -13,75 +13,81 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
         }
 
         .container {
             width: 100%;
             max-width: 1400px;
+            position: relative;
+            min-height: 900px;
         }
 
-        .desktop-view {
-            background: linear-gradient(180deg, #f5f5f7 0%, #e8e8eb 100%);
+        /* HEADER С ЛОГОТИПОМ */
+        .header-block {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 25px 35px;
             border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 20;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .desktop-header {
-            text-align: center;
-            margin-bottom: 50px;
-            color: #1d1d1f;
-        }
-
-        .desktop-header h1 {
-            font-size: 32px;
+        .header-block h2 {
+            font-size: 26px;
             font-weight: 700;
-            margin-bottom: 10px;
+            color: #1a1a1a;
+            margin-bottom: 5px;
         }
 
-        .desktop-header p {
-            font-size: 16px;
-            color: #86868b;
+        .header-block p {
+            font-size: 13px;
+            color: #666;
         }
 
-        .folders-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+        /* ПАПКИ - АБСОЛЮТНОЕ ПОЗИЦИОНИРОВАНИЕ */
+        .folders-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
         }
 
         .folder {
+            position: absolute;
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
             transition: transform 0.3s ease;
+            user-select: none;
         }
 
         .folder:hover {
-            transform: scale(1.15);
+            transform: scale(1.1);
         }
 
         .folder-icon {
-            width: 160px;
-            height: 140px;
-            border-radius: 20px 20px 10px 10px;
+            width: 140px;
+            height: 130px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 60px;
-            margin-bottom: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            font-size: 55px;
+            margin-bottom: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
             position: relative;
             overflow: hidden;
         }
@@ -92,77 +98,146 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 30px;
-            background: rgba(255,255,255,0.3);
+            height: 40px;
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 20px 20px 0 0;
         }
 
+        .folder:hover .folder-icon {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        /* РАЗНЫЕ ЦВЕТА ПАПОК */
         .folder-1 .folder-icon {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FF6B9D 0%, #C06C84 100%);
         }
 
         .folder-2 .folder-icon {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .folder-3 .folder-icon {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
         }
 
         .folder-name {
             font-size: 14px;
-            color: #1d1d1f;
-            font-weight: 500;
+            color: #1a1a1a;
+            font-weight: 600;
             text-align: center;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 8px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
-        .info-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+        /* ПОЗИЦИИ ПАПОК */
+        .folder-1 { top: 80px; left: 60px; }
+        .folder-2 { top: 280px; right: 70px; }
+        .folder-3 { bottom: 100px; left: 80px; }
+
+        /* INFO CARD - БОЛЬШАЯ КАРТОЧКА (справа внизу) */
+        .info-card-large {
+            position: absolute;
+            bottom: 60px;
+            right: 60px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            width: 400px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            z-index: 15;
         }
 
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
-        }
-
-        .card h2 {
-            color: #1d1d1f;
+        .info-card-large h3 {
             font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .card p {
-            color: #6f6f77;
-            font-size: 14px;
-            line-height: 1.6;
+        .info-card-large p {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.7;
             margin-bottom: 12px;
         }
 
-        .card a {
+        .info-card-large strong {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .info-card-large a {
             color: #667eea;
             text-decoration: none;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             transition: color 0.3s ease;
         }
 
-        .card a:hover {
+        .info-card-large a:hover {
             color: #764ba2;
         }
 
+        /* INFO CARD - МАЛЕНЬКАЯ КАРТОЧКА (слева по середине) */
+        .info-card-small {
+            position: absolute;
+            top: 320px;
+            left: 60px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            width: 320px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+            z-index: 15;
+        }
+
+        .info-card-small h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-card-small p {
+            font-size: 12px;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .info-card-small strong {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .info-card-small a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .info-card-small a:hover {
+            color: #764ba2;
+        }
+
+        /* МОДАЛЬНОЕ ОКНО */
         .modal {
             display: none;
             position: fixed;
@@ -171,7 +246,8 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
             animation: fadeIn 0.3s ease;
         }
 
@@ -181,47 +257,50 @@
         }
 
         .modal-content {
-            background-color: #f5f5f7;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             margin: 5% auto;
             padding: 0;
-            border-radius: 20px;
+            border-radius: 25px;
             width: 90%;
             max-width: 1000px;
             max-height: 80vh;
             overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.7);
             animation: slideIn 0.3s ease;
         }
 
         @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
+            from { transform: translateY(-30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
         .modal-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px;
-            border-radius: 20px 20px 0 0;
+            padding: 40px;
+            border-radius: 25px 25px 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .modal-header h2 {
-            font-size: 28px;
+            font-size: 32px;
             margin: 0;
+            font-weight: 700;
         }
 
         .close-btn {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: bold;
             cursor: pointer;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -230,7 +309,7 @@
         }
 
         .close-btn:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .modal-body {
@@ -238,8 +317,8 @@
         }
 
         .modal-description {
-            color: #6f6f77;
-            font-size: 16px;
+            color: #333;
+            font-size: 15px;
             line-height: 1.8;
             margin-bottom: 40px;
         }
@@ -251,11 +330,12 @@
         }
 
         .gallery-item {
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
             cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .gallery-item:hover {
@@ -291,7 +371,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.95);
+            background-color: rgba(0, 0, 0, 0.95);
             padding: 20px;
         }
 
@@ -310,28 +390,42 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             color: white;
         }
 
         @media (max-width: 768px) {
-            .folders-grid {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 20px;
+            .container {
+                min-height: auto;
             }
 
-            .folder-icon {
-                width: 120px;
-                height: 100px;
-                font-size: 40px;
+            .header-block {
+                top: 20px;
+                left: 20px;
+            }
+
+            .folder-1 { top: 120px; left: 20px; }
+            .folder-2 { top: auto; bottom: 300px; right: 20px; }
+            .folder-3 { bottom: 100px; left: 20px; }
+
+            .info-card-small {
+                display: none;
+            }
+
+            .info-card-large {
+                bottom: auto;
+                top: 650px;
+                right: 20px;
+                left: 20px;
+                width: auto;
             }
 
             .modal-header {
-                padding: 20px;
+                padding: 25px;
             }
 
             .modal-header h2 {
-                font-size: 20px;
+                font-size: 24px;
             }
 
             .modal-body {
@@ -346,47 +440,48 @@
 </head>
 <body>
     <div class="container">
-        <div class="desktop-view">
-            <div class="desktop-header">
-                <h1>🎨 U17.ZIP</h1>
-                <p>Visual Content Creator with AI</p>
+        <!-- HEADER -->
+        <div class="header-block">
+            <h2>🎨 U17.ZIP</h2>
+            <p>Visual Content Creator with AI</p>
+        </div>
+
+        <!-- ПАПКИ -->
+        <div class="folders-container">
+            <div class="folder folder-1" onclick="openProject('creativity')">
+                <div class="folder-icon">📁</div>
+                <div class="folder-name">Творчество</div>
             </div>
 
-            <div class="folders-grid">
-                <div class="folder folder-1" onclick="openProject('creativity')">
-                    <div class="folder-icon">📁</div>
-                    <div class="folder-name">Творчество</div>
-                </div>
-
-                <div class="folder folder-2" onclick="openProject('irnby')">
-                    <div class="folder-icon">📁</div>
-                    <div class="folder-name">IRNBY</div>
-                </div>
-
-                <div class="folder folder-3" onclick="openProject('clips')">
-                    <div class="folder-icon">📁</div>
-                    <div class="folder-name">Клипы</div>
-                </div>
+            <div class="folder folder-2" onclick="openProject('irnby')">
+                <div class="folder-icon">📁</div>
+                <div class="folder-name">IRNBY</div>
             </div>
 
-            <div class="info-cards">
-                <div class="card">
-                    <h2>👤 Обо мне</h2>
-                    <p><strong>Руслан "U17.ZIP"</strong></p>
-                    <p>Visual Content Creator с опытом в создании уникального контента с помощью AI. Специализируюсь на творческих решениях для брендов.</p>
-                    <p><strong>Instagram:</strong> <a href="https://instagram.com/u17.zip" target="_blank">@U17.zip</a></p>
-                </div>
-
-                <div class="card">
-                    <h2>💼 Коммерческое предложение</h2>
-                    <p><strong>Работать можем на постоянной основе</strong> — я предлагаю идеи и регулярно создаю контент, или точечно под конкретные задачи.</p>
-                    <p>Часть каталожной или рекламной съёмки можно реализовать <strong>без студии, фотографа и моделей</strong> — быстрее и с меньшими затратами.</p>
-                    <p>Готов выполнить тестовое по вашему ТЗ или самостоятельно подготовить концепцию специально для вашего бренда.</p>
-                </div>
+            <div class="folder folder-3" onclick="openProject('clips')">
+                <div class="folder-icon">📁</div>
+                <div class="folder-name">Клипы</div>
             </div>
+        </div>
+
+        <!-- МАЛЕНЬКАЯ КАРТОЧКА (СЛЕВА) -->
+        <div class="info-card-small">
+            <h3>👤 Обо мне</h3>
+            <p><strong>Руслан "U17.ZIP"</strong></p>
+            <p>Visual Content Creator с опытом в создании уникального контента с помощью AI. Специализируюсь на творческих решениях для брендов.</p>
+            <p><strong>Instagram:</strong> <a href="https://instagram.com/u17.zip" target="_blank">@U17.zip</a></p>
+        </div>
+
+        <!-- БОЛЬШАЯ КАРТОЧКА (СПРАВА) -->
+        <div class="info-card-large">
+            <h3>💼 Коммерческое предложение</h3>
+            <p><strong>Работать можем на постоянной основе</strong> — я предлагаю идеи и регулярно создаю контент, или точечно под конкретные задачи.</p>
+            <p>Часть каталожной или рекламной съёмки можно реализовать <strong>без студии, фотографа и моделей</strong> — быстрее и с меньшими затратами.</p>
+            <p>Готов выполнить тестовое по вашему ТЗ или самостоятельно подготовить концепцию специально для вашего бренда.</p>
         </div>
     </div>
 
+    <!-- МОДАЛЬНЫЕ ОКНА -->
     <div id="creativityModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
